@@ -50,6 +50,12 @@ EmeLifetimes[ ecg_Graph, OptionsPattern[] ] :=
     ]
   ] // Catenate;
 
+EmeLifeDurations[ ecg_, opts : OptionsPattern[EmeLifetimes] ] :=
+  LifeDurations[ EmeLifetimes[ ecg, opts ] ];
+
+EmeDecayRate[ ecg_, opts : OptionsPattern[EmeLifetimes] ] :=
+  DecayRate[ EmeLifeDurations[ ecg, opts ] ];
+
 (* ── WolframModel path ── *)
 
 EmeLifetimes[ wmeo_, opts : OptionsPattern[] ] /; Head[ wmeo ] === Symbol["WolframModelEvolutionObject"] :=

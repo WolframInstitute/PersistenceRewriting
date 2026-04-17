@@ -4,11 +4,23 @@ EmeLifetimes::usage =
     "EmeLifetimes[ecg] returns {eme, birth, death} triples from an EvolutionCausalGraph. \
 EmeLifetimes[wmeo] extracts lifetimes from a WolframModelEvolutionObject.";
 
+EmeLifeDurations::usage =
+    "EmeLifeDurations[ecg] returns the lifetime durations of emes tracked through an EvolutionCausalGraph or WolframModelEvolutionObject.";
+
+EmeDecayRate::usage =
+    "EmeDecayRate[ecg] fits an exponential distribution to eme lifetime durations and returns the decay rate \[Lambda].";
+
 LifeDurations::usage =
     "LifeDurations[lifetimes] returns the durations (death - birth) for a list of {eme, birth, death} triples.";
 
 DecayRate::usage =
     "DecayRate[durations] fits an exponential distribution and returns the decay rate \[Lambda].";
+
+FollowVertexEmes::usage =
+    "FollowVertexEmes[ecg, emes] returns the forward chain of states through which the given vertex emes persist.";
+
+BacktrackVertexEmes::usage =
+    "BacktrackVertexEmes[ecg, emes] returns the backward chain of states from which the given vertex emes descend.";
 
 CanonicalFoliation::usage =
     "CanonicalFoliation[graph] returns the canonical foliation (layering by shortest path from sources).";

@@ -98,3 +98,29 @@ RestrictEvolutionCausalGraph[ ecg_Graph, states_List ] :=
       ]
     ]
   ];
+
+(* ── Eme tracing ── *)
+
+FollowVertexEmes[ ecg_Graph, emes_List ] :=
+  Most @ NestWhileList[
+    states |-> DeleteDuplicates @@ (
+      Cases[
+        VertexOutComponent[ ecg, #, {1} ],
+        edge_DirectedEdge /; !IntersectingQ[ ListVertexEmes[ ExtractDestroyedSubgraph[ edge ] ], emes ] :> edge[[ 2 ]]
+      ] & /@ states
+    ),
+    Select[ GetSources[ ecg ], SubsetQ[ ListVertexEmes[ # ], emes ] & ],
+    Length[ # ] > 0 &
+  ];
+
+BacktrackVertexEmes[ ecg_Graph, emes_List ] :=
+  Most @ NestWhileList[
+    states |-> DeleteDuplicates @@ (
+      Cases[
+        VertexInComponent[ ecg, #, {1} ],
+        edge_DirectedEdge /; !IntersectingQ[ ListVertexEmes[ ExtractCreatedSubgraph[ edge ] ], emes ] :> edge[[ 1 ]]
+      ] & /@ states
+    ),
+    Select[ GetSinks[ ecg ], SubsetQ[ ListVertexEmes[ # ], emes ] & ],
+    Length[ # ] > 0 &
+  ];
