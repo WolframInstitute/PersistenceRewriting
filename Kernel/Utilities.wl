@@ -8,8 +8,6 @@ PackageScope[ExtractStatesSubgraph]
 PackageScope[ExtractCausalSubgraph]
 PackageScope[ExtractDestroyedSubgraph]
 PackageScope[ExtractCreatedSubgraph]
-PackageScope[FindStateEvolutionPath]
-PackageScope[RestrictEvolutionCausalGraph]
 PackageScope[RandomChain]
 
 (* ── Graph helpers ── *)
@@ -96,6 +94,19 @@ RestrictEvolutionCausalGraph[ ecg_Graph, states_List ] :=
           MemberQ[ states, #[[ 1 ]] ] && MemberQ[ states, #[[ 2 ]] ] &
         ]
       ]
+    ]
+  ];
+
+AllStateEvolutionPaths[ ecg_Graph, maxPaths_ : 200 ] :=
+  With[{
+    stateGraph = Graph[
+      Cases[ VertexList[ ecg ], Except[ _DirectedEdge ] ],
+      Cases[ VertexList[ ecg ], _DirectedEdge ]
+    ]
+  },
+    DeleteDuplicates @ Catenate[
+      FindPath[ stateGraph, #[[ 1 ]], #[[ 2 ]], Infinity, maxPaths ] & /@
+        Tuples[ { GetSources[ stateGraph ], GetSinks[ stateGraph ] } ]
     ]
   ];
 

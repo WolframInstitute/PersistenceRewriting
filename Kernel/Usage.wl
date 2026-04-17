@@ -22,6 +22,15 @@ FollowVertexEmes::usage =
 BacktrackVertexEmes::usage =
     "BacktrackVertexEmes[ecg, emes] returns the backward chain of states from which the given vertex emes descend.";
 
+FindStateEvolutionPath::usage =
+    "FindStateEvolutionPath[ecg] returns a random source-to-sink chain of states (a single-way branch) through the state subgraph of an EvolutionCausalGraph.";
+
+RestrictEvolutionCausalGraph::usage =
+    "RestrictEvolutionCausalGraph[ecg, states] returns the subgraph of ecg restricted to a given list of states and the events connecting them.";
+
+AllStateEvolutionPaths::usage =
+    "AllStateEvolutionPaths[ecg] enumerates every source-to-sink state path through an EvolutionCausalGraph. AllStateEvolutionPaths[ecg, maxPaths] caps the number of paths per source-sink pair.";
+
 CanonicalFoliation::usage =
     "CanonicalFoliation[graph] returns the canonical foliation (layering by shortest path from sources).";
 
