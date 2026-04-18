@@ -9,13 +9,13 @@ EmeLifetimes[ ecg_Graph, OptionsPattern[] ] :=
     causalGraph = ExtractCausalSubgraph[ ecg ],
     stateGraph = ExtractStatesSubgraph[ ecg ]
   },
-  {computationalTime = UniversalTime[ stateGraph ]},
+  {computationalTime = ProperTime[ stateGraph ]},
   {listEmes = If[ OptionValue[ "EmeType" ] === "Edge", ListEdgeEmes, ListVertexEmes ]},
   {emeTime = With[{ timeMeasure = OptionValue[ "TimeMeasure" ] },
     Which[
       timeMeasure === "ComputationalSteps", computationalTime,
       timeMeasure === "UniversalTime", Append[ (First @ VertexList @ stateGraph) -> 0 ] @
-        KeyMap[ #[[ 2 ]] &, UniversalTime[ causalGraph ] ],
+        KeyMap[ #[[ 2 ]] &, ProperTime[ causalGraph ] ],
       ListQ[ timeMeasure ], Append[ (First @ VertexList @ stateGraph) -> 0 ] @
         KeyMap[ #[[ 2 ]] &, ProperTime[ causalGraph, timeMeasure ] ]
     ]
@@ -75,7 +75,7 @@ wolframModelEmeLifetimes[ wmeo_, OptionsPattern[] ] :=
     timeMeasure === "ComputationalSteps",
       AssociationThread[ Range[ wmeo[ "EventsCount" ] ] -> Range[ wmeo[ "EventsCount" ] ] ],
     timeMeasure === "UniversalTime",
-      UniversalTime[ wmeo[ "CausalGraph" ] ],
+      ProperTime[ wmeo[ "CausalGraph" ] ],
     ListQ[ timeMeasure ],
       ProperTime[ wmeo[ "CausalGraph" ], timeMeasure ]
   ]},

@@ -72,7 +72,7 @@ SubstitutionSystemEmeLifetimes[ rule_Rule, init_String, steps_Integer, OptionsPa
     timeMeasure === "ComputationalSteps",
       AssociationThread[ Range[ tracking[ "EventCount" ] ] -> Range[ tracking[ "EventCount" ] ] ],
     timeMeasure === "UniversalTime",
-      UniversalTime[ tracking[ "CausalGraph" ] ],
+      ProperTime[ tracking[ "CausalGraph" ] ],
     ListQ[ timeMeasure ],
       ProperTime[ tracking[ "CausalGraph" ], timeMeasure ]
   ]},

@@ -1,5 +1,6 @@
 VerificationTest[
   PacletDirectoryLoad[ DirectoryName @ DirectoryName @ $TestFileName ];
+  Needs[ "WolframInstitute`InfraCausality`" ];
   Needs[ "WolframInstitute`PersistenceRewriting`" ];
   True,
   True,
@@ -7,15 +8,15 @@ VerificationTest[
 ]
 
 VerificationTest[
-  CanonicalFoliation[ Graph[ {1, 2, 3}, {1 -> 2, 2 -> 3} ] ],
+  LongestPathFoliation[ Graph[ {1, 2, 3}, {1 -> 2, 2 -> 3} ] ],
   {{1}, {2}, {3}},
-  TestID -> "CanonicalFoliation-Chain"
+  TestID -> "LongestPathFoliation-Chain"
 ]
 
 VerificationTest[
-  UniversalTime[ Graph[ {1, 2, 3}, {1 -> 2, 1 -> 3} ] ],
+  ProperTime[ Graph[ {1, 2, 3}, {1 -> 2, 1 -> 3} ] ],
   <|1 -> 0, 2 -> 1, 3 -> 1|>,
-  TestID -> "UniversalTime-Fork"
+  TestID -> "ProperTime-Fork"
 ]
 
 VerificationTest[

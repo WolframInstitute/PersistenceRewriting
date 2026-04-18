@@ -1,13 +1,12 @@
 Package["WolframInstitute`PersistenceRewriting`"]
 
+Needs["WolframInstitute`InfraCausality`"]
+
 PackageExport[EmeLifetimes]
 PackageExport[EmeLifeDurations]
 PackageExport[EmeDecayRate]
 PackageExport[LifeDurations]
 PackageExport[DecayRate]
-PackageExport[CanonicalFoliation]
-PackageExport[UniversalTime]
-PackageExport[ProperTime]
 PackageExport[FollowVertexEmes]
 PackageExport[BacktrackVertexEmes]
 PackageExport[FindStateEvolutionPath]

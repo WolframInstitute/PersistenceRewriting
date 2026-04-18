@@ -1,7 +1,7 @@
 Package["WolframInstitute`PersistenceRewriting`"]
 
-PackageScope[GetSources]
-PackageScope[GetSinks]
+Needs["WolframInstitute`InfraCausality`"]
+
 PackageScope[ListVertexEmes]
 PackageScope[ListEdgeEmes]
 PackageScope[ExtractStatesSubgraph]
@@ -12,36 +12,10 @@ PackageScope[RandomChain]
 
 (* ── Graph helpers ── *)
 
-GetSources[ g_ ] := Select[ VertexList @ g, VertexInDegree[ g, # ] == 0 & ];
-
-GetSinks[ g_ ] := Select[ VertexList @ g, VertexOutDegree[ g, # ] == 0 & ];
-
 RandomChain[ g_, spec_ : Infinity ] :=
   First @ FindPath[ g, RandomChoice[ GetSources[ g ] ], RandomChoice[ GetSinks[ g ] ] ]
 
-(* ── Time measures ── *)
-
-CanonicalFoliation[ g_Graph ] :=
-  With[{
-    sources = Select[ VertexList[ g ], VertexInDegree[ g, # ] == 0 & ],
-    d = -GraphDistanceMatrix[ Graph[ g, EdgeWeight -> ConstantArray[ -1, EdgeCount[ g ] ] ] ]
-  },
-  {layerOf = AssociationThread[
-    VertexList[ g ] ->
-      Round[ Min[ Select[ #, dist |-> dist > -Infinity ] ] & /@
-        MapThread[ List, d[[ VertexIndex[ g, sources ], All ]] ] ]
-  ]},
-    Values @ KeySort @ GroupBy[ Normal[ layerOf ], Last -> First ]
-  ]
-
-ProperTime[ g_Graph, foliation_List ] :=
-  AssociationThread[
-    Catenate[ foliation ] ->
-    Catenate @ MapIndexed[ ConstantArray[ First[ #2 ] - 1, Length[ #1 ] ] &, foliation ]
-  ]
-
-UniversalTime[ g_Graph ] :=
-  ProperTime[ g, CanonicalFoliation[ g ] ]
+(* ── Statistics helpers ── *)
 
 LifeDurations[ lifetimes_List ] :=
   Round[ #[[ 3 ]] - #[[ 2 ]] ] & /@ lifetimes;

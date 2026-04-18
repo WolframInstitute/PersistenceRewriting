@@ -31,15 +31,6 @@ RestrictEvolutionCausalGraph::usage =
 AllStateEvolutionPaths::usage =
     "AllStateEvolutionPaths[ecg] enumerates every source-to-sink state path through an EvolutionCausalGraph. AllStateEvolutionPaths[ecg, maxPaths] caps the number of paths per source-sink pair.";
 
-CanonicalFoliation::usage =
-    "CanonicalFoliation[graph] returns the canonical foliation (layering by shortest path from sources).";
-
-UniversalTime::usage =
-    "UniversalTime[graph] returns an association mapping vertices to their canonical foliation layer.";
-
-ProperTime::usage =
-    "ProperTime[graph, foliation] returns an association mapping vertices to layer indices in the given foliation.";
-
 SubstitutionSystemTokenTracking::usage =
     "SubstitutionSystemTokenTracking[rule, init, steps] tracks character tokens through sequential string rewriting.";
 

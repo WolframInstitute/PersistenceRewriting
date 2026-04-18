@@ -9,6 +9,7 @@ PacletObject[<|
     "PrimaryContext" -> "WolframInstitute`PersistenceRewriting`",
     "Dependencies" -> {
         "WolframInstitute/Hypergraph",
+        "WolframInstitute/InfraCausality",
         "Wolfram/Multicomputation"
     },
     "Extensions" -> {
